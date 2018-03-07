@@ -1,0 +1,49 @@
+{
+  "name": "pipelines-check",
+  "version": "1.0.0",
+  "description": "A collection of scripts for common things people need to check in Pipelines builds",
+  "main": "index.js",
+  "repository": "https://github.com/lukebatchelor/pipelines-check",
+  "author": "Luke Batchelor <lbatchelor@atlassian.com>",
+  "license": "MIT",
+  "bin": {
+    "bolt": "./bin.js"
+  },
+  "engines": {
+    "node": ">=7.6.0"
+  },
+  "files": [
+    "dist",
+    "index.js",
+    "bin.js"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "flow": "flow status",
+    "test": "jest --coverage",
+    "format": "prettier --write src/**/*.js",
+    "build:legacy": "BABEL_ENV=legacy babel src -d dist/legacy",
+    "build:modern": "BABEL_ENV=modern babel src -d dist/modern",
+    "build": "yarn run clean && yarn build:legacy && yarn build:modern",
+    "prepublish": "yarn build"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-runtime": "^6.26.0",
+    "chalk": "^2.3.2",
+    "meow": "^4.0.0"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^6.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^3.0.0",
+    "flow-bin": "^0.66.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.0"
+  }
+}
